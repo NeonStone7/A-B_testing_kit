@@ -1,12 +1,10 @@
-import numpy as np
+"""To calculate sample size for binomial and continuous metrics"""
 import pandas as pd
-import scipy.stats as stats
+from scipy import stats
 from typing import List
-import matplotlib.pyplot as plt
 
 def _binomial_sample_size_calc(metric_mean:float, mde:float, 
                                alpha:float, beta:float, tail_type:int):
-    
     """To calculate the sample size for the binomial metric
     Parameters: 
     metric_mean:mean of the metric,
@@ -59,8 +57,6 @@ def _binomial_sample_size_calc(metric_mean:float, mde:float,
     return result
 
 def _continuous_sample_size_calc(metric_mean, mde, alpha, beta, std_metric, tail_type):
-    
-        
     """To calculate the sample size for the continuous metric
     Parameters: 
     metric_mean:mean of the metric,
@@ -112,7 +108,7 @@ def sample_size_calc(metric_mean, mde, alpha, beta, tail_type = 1,
         
         return _binomial_sample_size_calc(metric_mean, mde, alpha, beta,tail_type)
         
-    elif metric_type.lower().strip() == 'continuous':
+    if metric_type.lower().strip() == 'continuous':
         
         return _continuous_sample_size_calc(metric_mean, mde, alpha, beta, std_metric,tail_type)
     
@@ -121,7 +117,6 @@ def sample_size_calc(metric_mean, mde, alpha, beta, tail_type = 1,
         return "Unknown metric type" 
     
 def pretest_bias(test_before:pd.DataFrame, control_before:pd.DataFrame, metrics:List):
-    
     """
     Welch's T-Test: Used equal_var=False in ttest_ind to perform Welch's t-test, 
     which does not assume equal variances. This is more robust in cases where the 
@@ -135,7 +130,7 @@ def pretest_bias(test_before:pd.DataFrame, control_before:pd.DataFrame, metrics:
     for metric in metrics:
 
         # Perform t-test
-        t_stat, p_value = stats.ttest_ind(test_before[metric], control_before[metric], equal_var=False)  # Welch's t-test
+        _, p_value = stats.ttest_ind(test_before[metric], control_before[metric], equal_var=False)  # Welch's t-test
 
         # Interpret results
         if p_value < 0.05:

@@ -30,7 +30,7 @@ def explore_cardinality(df:pd.DataFrame, categorical_columns:List, unique_value_
             print(f'Unique values in {column}: {df[column].unique().tolist()}')
             print(f'Frequency of values in {column}: {df[column].value_counts(normalize = True)}')
 
-            fig, ax = plt.subplots(1,2)
+            _, ax = plt.subplots(1,2)
 
             sns.countplot(data = df, y = column, ax = ax[0], palette = 'coolwarm')
 
@@ -53,7 +53,7 @@ def explore_distribution(df:pd.DataFrame, numerical_columns:List):
     
     for column in numerical_columns:
     
-        fig, ax = plt.subplots(1,2)
+        _, ax = plt.subplots(1,2)
 
         sns.histplot(data = df, x = column, color = 'purple', kde = True, ax = ax[0])
 
