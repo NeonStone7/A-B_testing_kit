@@ -1,13 +1,6 @@
-import matplotlib.pyplot as plt
-import scipy
-import random
-from datetime import datetime
-import numpy as np
+"""Statistical tests for ab test"""
 import pandas as pd
-import seaborn as sns
-from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
-import scipy.stats as stats
-from typing import List
+from scipy import stats
 
 def _normality_test(test:pd.DataFrame, control:pd.DataFrame, column:str, alpha:float):
     
