@@ -1,9 +1,11 @@
+"""To generate the simulated data"""
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
 # Function to generate random timestamps
-def generate_random_timestamps(start, end, n):
+def generate_random_timestamps(start, end, n_samples):
+    """Generate random timestamps"""
     start_u = start.value // 10**9
     end_u = end.value // 10**9
     return pd.to_datetime(np.random.randint(start_u, end_u, n), unit='s')
@@ -11,7 +13,7 @@ def generate_random_timestamps(start, end, n):
 # Parameters
 n = 200000
 user_ids = np.arange(1, 80000)  # fewer unique users to allow duplicates
-ad_types = np.random.choice([x for x in range(101, 201)], n)
+ad_types = np.random.choice(list(range(101, 201)) , n)
 event_types = ['impression', 'click']
 start_date = datetime(2024, 6, 1)
 end_date = datetime(2024, 7, 30)
