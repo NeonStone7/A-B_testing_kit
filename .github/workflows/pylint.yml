@@ -23,4 +23,4 @@ jobs:
 
       - name: Run pylint
         run: |
-          pylint $(git ls-files '*.py') || true
+          pylint $(git ls-files '*.py') --fail-under=8.0 || echo "Pylint failed with score below threshold."
