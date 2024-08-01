@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.10"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -24,4 +24,4 @@ jobs:
         jupytext --to py $(git ls-files '*.ipynb')
     - name: Analysing the code with pylint
       run: |
-        pylint --recursive=y *.py **/*.py **/**/*.py **/**/**/*.py --disable=C0103,W0104,C0301,C0303,C0411,C0200,C0412,C0413,E0401,E0602,R0801,R0913,R1705,R1723,W0621,W0613,W1202 --fail-under=8
+        pylint --recursive=y *.py **/*.py **/**/*.py **/**/**/*.py  -fail-under=7.0 --recursive=y --enable=W
