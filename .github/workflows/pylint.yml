@@ -21,12 +21,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint
 
-      - name: Analysing the code with pylint
+      - name: Run pylint
         run: |
-          pylint $(git ls-files '*.py') --output=lint.txt || true
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: lint.txt
-          path: lint.txt
+          pylint $(git ls-files '*.py') || true
